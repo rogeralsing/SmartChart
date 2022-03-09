@@ -71,7 +71,7 @@ public class Shape
         {
             "circle"   => $"\t<rect class='shape {Type}' x='{left}' y='{top}' width='{width}' height='{height}' rx='50%' />",
             "rect"     => $"\t<rect class='shape {Type}' x='{left}' y='{top}' width='{width}' height='{height}' />",
-            "triangle" => $"\t<rect class='shape {Type}' x='{left}' y='{top}' width='{width}' height='{height}' />",
+            "triangle" => $"\t<polygon class='shape {Type}' points='{left},{top+height} {left+width/2},{top} {left+width},{top+height}' />",
             _          => ""
         };
         sb.AppendLine(el);
