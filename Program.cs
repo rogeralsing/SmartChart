@@ -19,8 +19,8 @@ var b = new Shape
     Label  = "B",
     Right  = a.AnchorLeft - 2,
     Top    = a.AnchorTop,
-    Width  = 6,
-    Height = 6
+    Width  = 5,
+    Height = 5
 };
 var c = new Shape
 {
@@ -45,10 +45,10 @@ shapes.AddRange(new[] { a, b, c, d });
 foreach (var shape in shapes)
 {
     var bounds = shape.GetBounds();
-    var left = bounds.Left * 50 + 3;
-    var width = bounds.Width * 50 + 3;
-    var top = bounds.Top * 50 - 6;
-    var height = bounds.Height * 50 - 6;
+    var left = (int)(bounds.Left * 50 + 3);
+    var width = (int)(bounds.Width * 50 + 3);
+    var top = (int)(bounds.Top * 50 - 6);
+    var height = (int)(bounds.Height * 50 - 6);
     var el = $"<div class='{shape.Type} shape' style='left:{left}px; width:{width}px; top:{top}px; height:{height}px;'>{shape.Label}</div>";
     WriteLine(el);
 }
