@@ -4,7 +4,7 @@ using System.Text;
 using SmartChart;
 using static System.Console;
 
-var shapes = new List<Shape>();
+var shapes = new List<Element>();
 var a = new Shape
 {
     Type   = "rect",

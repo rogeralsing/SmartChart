@@ -2,7 +2,12 @@ using System.Text;
 
 namespace SmartChart;
 
-public class Shape
+public abstract class Element
+{
+    public abstract void Render(StringBuilder sb);
+}
+
+public class Shape : Element
 {
     public Group Group { private get; set; }
     public string Type { get; init; }
@@ -59,7 +64,7 @@ public class Shape
 
     public Bounds GetBounds() => new(AnchorLeft.Fun(), AnchorTop.Fun(), AnchorWidth.Fun(), AnchorHeight.Fun());
 
-    public void Render(StringBuilder sb)
+    public override void Render(StringBuilder sb)
     {
         var bounds = GetBounds();
         var left = (int)(bounds.Left * 50 + 3);
