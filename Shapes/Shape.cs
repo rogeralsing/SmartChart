@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace SmartChart;
 
 public class Shape
@@ -56,4 +58,25 @@ public class Shape
     public RDouble GetBottom() => AnchorTop + AnchorHeight;
 
     public Bounds GetBounds() => new(AnchorLeft.Fun(), AnchorTop.Fun(), AnchorWidth.Fun(), AnchorHeight.Fun());
+
+    public void Render(StringBuilder sb)
+    {
+        var bounds = GetBounds();
+        var left = (int)(bounds.Left * 50 + 3);
+        var width = (int)(bounds.Width * 50 + 3);
+        var top = (int)(bounds.Top * 50 - 6);
+        var height = (int)(bounds.Height * 50 - 6);
+        sb.AppendLine("<g>");
+        var el = Type switch
+        {
+            "circle"   => $"\t<rect class='shape {Type}' x='{left}' y='{top}' width='{width}' height='{height}' rx='50%' />",
+            "rect"     => $"\t<rect class='shape {Type}' x='{left}' y='{top}' width='{width}' height='{height}' />",
+            "triangle" => $"\t<rect class='shape {Type}' x='{left}' y='{top}' width='{width}' height='{height}' />",
+            _          => ""
+        };
+        sb.AppendLine(el);
+        var lb = $"\t<foreignObject class='text' x='{left}' y='{top}' width='{width}' height='{height}'>{Label}</foreignObject>";
+        sb.AppendLine(lb);
+        sb.AppendLine("</g>");
+    }
 }

@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using System.Text;
 using SmartChart;
 using static System.Console;
 
@@ -42,13 +43,9 @@ var d = new Shape
 };
 shapes.AddRange(new[] { a, b, c, d });
 
+var sb = new StringBuilder();
 foreach (var shape in shapes)
 {
-    var bounds = shape.GetBounds();
-    var left = (int)(bounds.Left * 50 + 3);
-    var width = (int)(bounds.Width * 50 + 3);
-    var top = (int)(bounds.Top * 50 - 6);
-    var height = (int)(bounds.Height * 50 - 6);
-    var el = $"<div class='{shape.Type} shape' style='left:{left}px; width:{width}px; top:{top}px; height:{height}px;'>{shape.Label}</div>";
-    WriteLine(el);
+    shape.Render(sb);
 }
+WriteLine(sb.ToString());
