@@ -7,6 +7,24 @@ public abstract class Element
     public abstract void Render(StringBuilder sb);
 }
 
+public class Line : Element
+{
+    public RDouble X1 {  get; init; }
+    public RDouble Y1 {  get; init; }
+    public RDouble X2 {  get; init; }
+    public RDouble Y2 {  get; init; }
+
+    public override void Render(StringBuilder sb)
+    {
+        var x1 = (int)(X1.Fun() * 50d);
+        var y1 = (int)(Y1.Fun() * 50d);
+        var x2 = (int)(X2.Fun() * 50d);
+        var y2 = (int)(Y2.Fun() * 50d);
+        
+        sb.AppendLine($"\t<line class='line' x1='{x1}' y1='{y1}' x2='{x2}' y2='{y2}' />");
+    }
+}
+
 public class Shape : Element
 {
     public Group Group { private get; set; }
@@ -58,19 +76,19 @@ public class Shape : Element
     
     public RDouble AnchorCenterY => AnchorTop + AnchorHeight / 2d;
 
-    public RDouble GetRight() => AnchorLeft + AnchorWidth;
+    public RDouble AnchorRight => AnchorLeft + AnchorWidth;
 
-    public RDouble GetBottom() => AnchorTop + AnchorHeight;
+    public RDouble AnchorBottom => AnchorTop + AnchorHeight;
 
     public Bounds GetBounds() => new(AnchorLeft.Fun(), AnchorTop.Fun(), AnchorWidth.Fun(), AnchorHeight.Fun());
 
     public override void Render(StringBuilder sb)
     {
         var bounds = GetBounds();
-        var left = (int)(bounds.Left * 50 + 3);
-        var width = (int)(bounds.Width * 50 + 3);
-        var top = (int)(bounds.Top * 50 - 6);
-        var height = (int)(bounds.Height * 50 - 6);
+        var left = (int)(bounds.Left * 50d );
+        var width = (int)(bounds.Width * 50d );
+        var top = (int)(bounds.Top * 50d );
+        var height = (int)(bounds.Height * 50d );
         sb.AppendLine("<g>");
         var el = Type switch
         {

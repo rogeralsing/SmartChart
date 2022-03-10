@@ -41,9 +41,52 @@ var d = new Shape
     Width   = 2,
     Height  = 2,
 };
-shapes.AddRange(new[] { a, b, c, d });
+
+var l = new Line()
+{
+    X1 = a.AnchorCenterX,
+    Y1 = a.AnchorCenterY,
+
+    X2 = d.AnchorCenterX,
+    Y2 = d.AnchorCenterY,
+};
+
+WriteLine(d.AnchorCenterX.Fun());
+WriteLine(d.AnchorCenterY.Fun());
+
+
+WriteLine(l.X2.Fun());
+WriteLine(l.Y2.Fun());
+
+shapes.AddRange(new Element[] { a, b, c, d ,l });
 
 var sb = new StringBuilder();
+sb.AppendLine(@"
+<style>
+  .shape {
+    fill: #ff0000;
+    stroke: #00ff00;
+    stroke-width: 2px;
+  }
+  .text {
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  .rect {
+  }
+  .circle {
+  }
+  .triangle {
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  }
+  .line {
+    stroke: #ff00ff;
+    stroke-width: 2px;
+  }
+</style>
+
+<svg xmlns='http://www.w3.org/2000/svg' width='1000' height='800'>
+");
 foreach (var shape in shapes)
 {
     shape.Render(sb);
